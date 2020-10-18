@@ -76,8 +76,8 @@ def call(cfg) {
                 printPostContent: true,
                 silentResponse: true,
 
-                regexpFilterExpression: '(CI|Ci|cI|ci):.*',
-                regexpFilterText: '$COMMMIT_MESSAGE'
+                // regexpFilterExpression: '(CI|Ci|cI|ci):.*',
+                // regexpFilterText: '$COMMMIT_MESSAGE'
 
             )
         }
