@@ -154,49 +154,51 @@ def call(cfg) {
                 }
             }
 
-            stage('推送docker') {
-                when { expression {
-                    return  (runOpts == "auto")
-                    }
-                }
-                steps {
-                    container('docker') {
-                        script{
-                            // dir("${JOB_NAME}-${BUILD_NUMBER}"){
-                            anothertool.PrintMes("----------------","green")
-                            dir("${COMMMIT_MESSAGE}"){
-                                // sh "sed -i 's/default/${COMMMIT_MESSAGE}-${JAR_TAG}/g' startup.sh"
-                                sh "sed -i 's/default/${COMMMIT_MESSAGE}-${JAR_TAG}/g' Dockerfile"
-                                docker.PushHarborDocker("${COMMMIT_MESSAGE}","${DOCKER_IMAGE_TAG}","${HARBOR_URL}","${GITLAB_GROUP}")
-                            }
-                            // }
-                        }
-                    }
-                }
-            }
+            // stage('推送docker') {
+            //     when { expression {
+            //         return  (runOpts == "auto")
+            //         }
+            //     }
+            //     steps {
+            //         container('docker') {
+            //             script{
+            //                 // dir("${JOB_NAME}-${BUILD_NUMBER}"){
+            //                 anothertool.PrintMes("----------------","green")
+            //                 dir("${COMMMIT_MESSAGE}"){
+            //                     // sh "sed -i 's/default/${COMMMIT_MESSAGE}-${JAR_TAG}/g' startup.sh"
+            //                     sh "sed -i 's/default/${COMMMIT_MESSAGE}-${JAR_TAG}/g' Dockerfile"
+            //                     docker.PushHarborDocker("${COMMMIT_MESSAGE}","${DOCKER_IMAGE_TAG}","${HARBOR_URL}","${GITLAB_GROUP}")
+            //                 }
+            //                 // }
+            //             }
+            //         }
+            //     }
+            // }
 
-            stage('打包推送到helm') {
-                when { expression {
-                    return  (runOpts == "auto")
-                    }
-                }
-                steps {
-                    container("${cfg.CI_EKS_NAME}") {
-                        script{
-                            // dir("${JOB_NAME}-${BUILD_NUMBER}/${COMMMIT_MESSAGE}/deployment/helm/"){
-                            dir("${COMMMIT_MESSAGE}/deployment/helm/"){
-                                withCredentials([usernamePassword(credentialsId: 'harbor-admin', passwordVariable: 'password', usernameVariable: 'username')]) {
-                                    sh """
-                                    HELM_PACKAGE_NAME=`helm package ${COMMMIT_MESSAGE}| awk -F '/' '{print \$NF}'`
-                                    helm repo add --username=${username} --password=${password}  ${COMMMIT_MESSAGE} https://${HARBOR_URL}/chartrepo/${GITLAB_GROUP}
-                                    helm push \$HELM_PACKAGE_NAME ${COMMMIT_MESSAGE}
-                                    """
-                                }
-                            }
-                        }
-                    }
-                }
-            }          
+            // stage('打包推送到helm') {
+            //     when { expression {
+            //         return  (runOpts == "auto")
+            //         }
+            //     }
+            //     steps {
+            //         container("${cfg.CI_EKS_NAME}") {
+            //             script{
+            //                 // dir("${JOB_NAME}-${BUILD_NUMBER}/${COMMMIT_MESSAGE}/deployment/helm/"){
+            //                 dir("${COMMMIT_MESSAGE}/deployment/helm/"){
+            //                     withCredentials([usernamePassword(credentialsId: 'harbor-admin', passwordVariable: 'password', usernameVariable: 'username')]) {
+            //                         sh """
+            //                         HELM_PACKAGE_NAME=`helm package ${COMMMIT_MESSAGE}| awk -F '/' '{print \$NF}'`
+            //                         helm repo add --username=${username} --password=${password}  ${COMMMIT_MESSAGE} https://${HARBOR_URL}/chartrepo/${GITLAB_GROUP}
+            //                         helm push \$HELM_PACKAGE_NAME ${COMMMIT_MESSAGE}
+            //                         """
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+
+
         }
     }
 }
