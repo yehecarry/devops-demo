@@ -1,0 +1,3 @@
+这是一个Jenkins
+Jenkins 用户名amdin
+jenkins 密码Sn473dSijq
