@@ -141,23 +141,23 @@ def call(cfg) {
                 }
             }
 
-            stage('编译代码') {
-                when { expression {
-                    return  (runOpts == "auto")
-                    }
-                }
-                steps {
-                    container('jnlp-agent-nodejs'){
-                        script{
-                            anothertool.PrintMes("CI CODE BUILD BEGIN","green")
-                            sh """
-                            ${cfg.DEMO_BUILD}
-                            """
-                            anothertool.PrintMes("CI CODE BUILD OVER","green")
-                        }
-                    }
-                }
-            }
+            // stage('编译代码') {
+            //     when { expression {
+            //         return  (runOpts == "auto")
+            //         }
+            //     }
+            //     steps {
+            //         container('jnlp-agent-nodejs'){
+            //             script{
+            //                 anothertool.PrintMes("CI CODE BUILD BEGIN","green")
+            //                 sh """
+            //                 ${cfg.DEMO_BUILD}
+            //                 """
+            //                 anothertool.PrintMes("CI CODE BUILD OVER","green")
+            //             }
+            //         }
+            //     }
+            // }
 
             stage('推送docker') {
                 when { expression {
