@@ -12,14 +12,8 @@ def call(cfg) {
     // 导入默认配置
     method.defaultConf()
 
-    // 不能注释否则ci拿不到参数
-    try{
-        branchName = anothertool.GetBranch("${pushCategory}","${branch}")
-        anothertool.PrintMes("CI BEGING","green")
-    } catch (Exception e) {
-        def runOpts = "manaul"
-        anothertool.PrintMes("Read SETTINGS","green")
-    }
+    branchName = anothertool.GetBranch("${pushCategory}","${branch}")
+        
 
 
     pipeline {
