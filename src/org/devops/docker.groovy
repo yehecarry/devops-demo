@@ -1,6 +1,6 @@
 package org.devops
 
-def PushHarborDocker(docker_image_name,docker_image_tag,harbor_url,harbor_group) {
+def PushHarborDocker(docker_image_name,docker_image_tag,harbor_url) {
     withCredentials([usernamePassword(credentialsId: 'harbor-admin', passwordVariable: 'password', usernameVariable: 'username')]) {
         
         docker_image = "${docker_image_name}:${docker_image_tag}"
