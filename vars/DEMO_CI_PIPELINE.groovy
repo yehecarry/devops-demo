@@ -139,7 +139,7 @@ def call(cfg) {
                     }
                 }
                 steps {
-                    container('nodejs'){
+                    container('jnlp-agent-nodejs'){
                         script{
                             // dir("${JOB_NAME}-${BUILD_NUMBER}"){
                             // 导入配置文件
