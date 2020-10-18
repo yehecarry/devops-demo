@@ -79,6 +79,9 @@ def call(cfg) {
         // 常量参数，初始确定后一般不需更改
         environment {
             CRED_ID = "gitlab-token"
+            // 声明全局变量
+            DOCKER_URL = "https://hub.docker.com/"
+            DOCKER_IMAGE_TAG = ""
         }
 
         post {
@@ -110,6 +113,17 @@ def call(cfg) {
 
         //步骤设置
         stages {
+            stage('处理一些变量'){
+                when { expression {
+                    return  (runOpts == "auto")
+                    }
+                }
+                steps {
+                    script{
+                        DOCKER_IMAGE_TAG = "${branchName}"
+                    }
+                }
+            }
             stage('CI获取版本库代码') {
                 when { expression {
                     return  (runOpts == "auto")
@@ -135,39 +149,29 @@ def call(cfg) {
                 steps {
                     container('jnlp-agent-nodejs'){
                         script{
-                            // dir("${JOB_NAME}-${BUILD_NUMBER}"){
-                            // 导入配置文件
                             anothertool.PrintMes("CI CODE BUILD BEGIN","green")
                             sh """
                             ${cfg.DEMO_BUILD}
                             """
                             anothertool.PrintMes("CI CODE BUILD OVER","green")
-                            // }
                         }
                     }
                 }
             }
 
-            // stage('推送docker') {
-            //     when { expression {
-            //         return  (runOpts == "auto")
-            //         }
-            //     }
-            //     steps {
-            //         container('docker') {
-            //             script{
-            //                 // dir("${JOB_NAME}-${BUILD_NUMBER}"){
-            //                 anothertool.PrintMes("----------------","green")
-            //                 dir("${COMMMIT_MESSAGE}"){
-            //                     // sh "sed -i 's/default/${COMMMIT_MESSAGE}-${JAR_TAG}/g' startup.sh"
-            //                     sh "sed -i 's/default/${COMMMIT_MESSAGE}-${JAR_TAG}/g' Dockerfile"
-            //                     docker.PushHarborDocker("${COMMMIT_MESSAGE}","${DOCKER_IMAGE_TAG}","${HARBOR_URL}","${GITLAB_GROUP}")
-            //                 }
-            //                 // }
-            //             }
-            //         }
-            //     }
-            // }
+            stage('推送docker') {
+                when { expression {
+                    return  (runOpts == "auto")
+                    }
+                }
+                steps {
+                    container('jnlp-agent-docker') {
+                        script{
+                            docker.PushHarborDocker("${COMMMIT_MESSAGE}","${DOCKER_IMAGE_TAG}","${DOCKER_URL}")
+                        }
+                    }
+                }
+            }
 
             // stage('打包推送到helm') {
             //     when { expression {
