@@ -83,9 +83,9 @@ def call(cfg) {
         }
 
         // 常量参数，初始确定后一般不需更改
-        environment {
+        // environment {
 
-        }
+        // }
 
         post {
             success {
