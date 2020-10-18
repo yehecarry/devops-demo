@@ -80,7 +80,7 @@ def call(cfg) {
         environment {
             CRED_ID = "gitlab-token"
             // 声明全局变量
-            DOCKER_URL = "https://hub.docker.com/"
+            DOCKER_URL = "hub.docker.com"
             DOCKER_IMAGE_TAG = ""
         }
 
@@ -167,7 +167,7 @@ def call(cfg) {
                 steps {
                     container('jnlp-agent-docker') {
                         script{
-                            docker.PushHarborDocker("${COMMMIT_MESSAGE}","${DOCKER_IMAGE_TAG}","${DOCKER_URL}")
+                            docker.PushHarborDocker("${COMMMIT_MESSAGE}","${DOCKER_IMAGE_TAG}","${DOCKER_URL}","${DOCKER_GROUP}")
                         }
                     }
                 }
