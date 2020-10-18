@@ -123,16 +123,9 @@ def call(cfg) {
                 }
                 steps {
                     script{
-                        // dir("${JOB_NAME}-${BUILD_NUMBER}"){
-                        // 导入配置文件
                         anothertool.PrintMes("CI CODE PULL BEGIN","green")
                         method.gitscm("${branchName}","${url}")
-                        // 获取最后一条commit 信息的提交
-                        COMMMIT_MESSAGE = "${COMMMIT_MESSAGE}".split('\n')[0].split(':')[1]
-                        // 判断如果文件夹不存在，退出并告警
-                        sh "[ -d $COMMMIT_MESSAGE ] || return"
                         anothertool.PrintMes("CI CODE PULL OVER","green")
-                        // }
                         // 覆盖配置文件
                         cfg = pipelineCfg()
                         println cfg
@@ -152,9 +145,7 @@ def call(cfg) {
                             // 导入配置文件
                             anothertool.PrintMes("CI CODE BUILD BEGIN","green")
                             sh """
-                            npm install
-                            npm run build:prod
-                            docker build -t nodedemo:v1.0.0 .
+                            ${cfg.DEMO_BUILD}
                             """
                             anothertool.PrintMes("CI CODE BUILD OVER","green")
                             // }
