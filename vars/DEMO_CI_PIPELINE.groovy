@@ -5,7 +5,7 @@ def call(cfg) {
     // 导入docker模块
     def docker = new org.devops.docker()
     // 导入sonar模块
-    def sonar = new org.devops.sonar()
+    // def sonar = new org.devops.sonar()
     // 导入通用模块
     def anothertool = new org.devops.anothertool()
 
