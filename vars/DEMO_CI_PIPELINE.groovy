@@ -167,6 +167,7 @@ def call(cfg) {
                 steps {
                     container('jnlp-agent-docker') {
                         script{
+                            sh "sleep 1000000"
                             docker.PushHarborDocker("${PROJECT}","${DOCKER_IMAGE_TAG}","${DOCKER_GROUP}")
                         }
                     }
