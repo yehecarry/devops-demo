@@ -51,7 +51,7 @@ def call(cfg) {
                 // 删除tag分支
                 [defaultValue: 'NOMSG',key: 'after', value: '$.after'],
                 // 项目名称
-                [defaultValue: 'NOMSG',key: 'project', value: '$.project.name'],
+                [defaultValue: 'NOMSG',key: 'PROJECT', value: '$.project.name'],
                 // Commit项目名称
                 [defaultValue: 'NOMSG',key: 'COMMMIT_MESSAGE', value: '$.commits[-1].message'],
                 // GitlabGroup名称
@@ -81,6 +81,7 @@ def call(cfg) {
             CRED_ID = "gitlab-token"
             // 声明全局变量
             DOCKER_URL = "hub.docker.com"
+            DOCKER_GROUP = "a7179072/devopsdemo"
             DOCKER_IMAGE_TAG = ""
         }
 
@@ -167,7 +168,7 @@ def call(cfg) {
                 steps {
                     container('jnlp-agent-docker') {
                         script{
-                            docker.PushHarborDocker("${COMMMIT_MESSAGE}","${DOCKER_IMAGE_TAG}","${DOCKER_URL}","${DOCKER_GROUP}")
+                            docker.PushHarborDocker("${PROJECT}","${DOCKER_IMAGE_TAG}","${DOCKER_URL}","${DOCKER_GROUP}")
                         }
                     }
                 }
