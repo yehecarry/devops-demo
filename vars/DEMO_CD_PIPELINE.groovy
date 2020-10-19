@@ -180,9 +180,9 @@ def call(cfg) {
                 }
             }
 
-            always {
-                cleanWs()
-            }
+ //           always {
+  //              cleanWs()
+  //          }
         }
 
         //步骤设置
