@@ -204,10 +204,10 @@ def call(cfg) {
                         script{
                             withCredentials([usernamePassword(credentialsId: 'harbor-admin', passwordVariable: 'password', usernameVariable: 'username')]) {
                                 sh """
-                                aws eks --region ${REGION} update-kubeconfig --name ${EKS_NAME}
+                                aws eks --region \$REGION update-kubeconfig --name \$EKS_NAME
                                 helm repo add --username=${username} --password=${password} ${DOCKER_IMAGE} https://xxxxx/chartrepo/${NAME_SPACE}
                                 helm repo update
-                                helm upgrade -i -n ${NAME_SPACE} --set server.GroupA.image.tag=${GROUPA_DOCKER_TAG} --set server.GroupB.image.tag=${GROUPB_DOCKER_TAG} --set server.env[0].name="SPRING_ENV",server.env[0].value="tw_prod" --set filebeat.config.env="tw_prod" ${DOCKER_IMAGE} ${DOCKER_IMAGE}/${DOCKER_IMAGE}
+                                helm upgrade -i -n fps-server --set server.image.tag=${GROUPA_DOCKER_TAG} ${DOCKER_IMAGE} ${DOCKER_IMAGE}/${DOCKER_IMAGE}
                                 """
                             }
                         }
