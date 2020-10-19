@@ -1,7 +1,5 @@
-这是一个Jenkins
-Jenkins 演示地址：http://devopsdemo.funplus.social/
-Jenkins 用户名amdin
-jenkins 密码qweqweqwe
+这是一个Jenkins共享库
+
 
 
 共享库使用方法
