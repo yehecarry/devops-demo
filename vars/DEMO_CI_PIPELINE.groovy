@@ -80,7 +80,7 @@ def call(cfg) {
         environment {
             CRED_ID = "gitlab-token"
             // 声明全局变量
-            DOCKER_GROUP = "a7179072/devopsdemo"
+            DOCKER_GROUP = "a7179072"
             DOCKER_IMAGE_TAG = ""
         }
 
