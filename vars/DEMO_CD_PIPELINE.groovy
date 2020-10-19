@@ -204,10 +204,10 @@ def call(cfg) {
                         script{
                             println "如果添加kubectl-demo 会有暴露accesskey的风险，写一个伪代码，这部就是kubectl apply -f ，生产环境一般使用helm，但是JFrog 真难用"
                             println "发版的项目的dockertag为$GROUPA_DOCKER_TAG 这个镜像"
-							sh """
+							// sh """
 							// sed -i  s/v1.1.5/\$GROUPA_DOCKER_TAG/g deployment.yaml
 							// kubectl apply -f deployment.yaml
-							"""
+							// """
                         }
                     // }
                 }
