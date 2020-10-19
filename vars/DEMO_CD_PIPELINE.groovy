@@ -51,7 +51,7 @@ def call(cfg) {
                         classpath: [], 
                         sandbox: false,
                         script: 
-                            return ["demo"]
+                            'return ["demo"]'
                     ]
                 ]
             ], 
