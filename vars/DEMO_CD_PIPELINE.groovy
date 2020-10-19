@@ -209,7 +209,7 @@ def call(cfg) {
                             //     aws eks --region \$REGION update-kubeconfig --name \$EKS_NAME
                             //     helm repo add --username=${username} --password=${password} ${DOCKER_IMAGE} https://harbor_url/chartrepo/${NAME_SPACE}
                             //     helm repo update
-                            //     helm upgrade -i -n fps-server --set server.image.tag=${GROUPA_DOCKER_TAG} --set server.env.value_spring_env="tw_prod" --set filebeat.config.env="tw_prod" ${DOCKER_IMAGE} ${DOCKER_IMAGE}/${DOCKER_IMAGE}
+                            //     helm upgrade -i -n fps-server --set server.image.tag=${GROUPA_DOCKER_TAG}  ${DOCKER_IMAGE} ${DOCKER_IMAGE}/${DOCKER_IMAGE}
                             //     """
                             // }
                         }
