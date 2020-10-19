@@ -132,7 +132,6 @@ def call(cfg) {
 							  }
 							}
 							Get_env()'''
-                            '''
                     ]
                 ]
             ]
