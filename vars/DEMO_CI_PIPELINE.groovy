@@ -149,7 +149,7 @@ def call(cfg) {
                 steps {
                     container('jnlp-agent-docker') {
                         script{
-                            docker.PushHarborDocker("${PROJECT}","${DOCKER_IMAGE_TAG}","${DOCKER_GROUP}")
+                            docker.PushHarborDocker("${PROJECT}","test-${DOCKER_IMAGE_TAG}","${DOCKER_GROUP}")
                         }
                     }
                 }
