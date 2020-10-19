@@ -200,16 +200,12 @@ def call(cfg) {
 
             stage('部署服务') {
                 steps {
-                    container("demo") {
+                    container("kubectl-demo") {
                         script{
-                            withCredentials([usernamePassword(credentialsId: 'harbor-admin', passwordVariable: 'password', usernameVariable: 'username')]) {
-                                sh """
-                                aws eks --region \$REGION update-kubeconfig --name \$EKS_NAME
-                                helm repo add --username=${username} --password=${password} ${DOCKER_IMAGE} https://xxxxx/chartrepo/${NAME_SPACE}
-                                helm repo update
-                                helm upgrade -i -n fps-server --set server.image.tag=${GROUPA_DOCKER_TAG} ${DOCKER_IMAGE} ${DOCKER_IMAGE}/${DOCKER_IMAGE}
-                                """
-                            }
+							sh """
+							sed -i  s/v1.1.5/\$GROUPA_DOCKER_TAG/g deployment.yaml
+							kubectl apply -f deployment.yaml
+							"""
                         }
                     }
                 }
