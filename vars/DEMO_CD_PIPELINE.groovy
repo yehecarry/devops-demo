@@ -204,10 +204,14 @@ def call(cfg) {
                         script{
                             println "如果添加kubectl-demo 会有暴露accesskey的风险，写一个伪代码，这部就是kubectl apply -f ，生产环境一般使用helm，但是JFrog 真难用"
                             println "发版的项目的dockertag为$GROUPA_DOCKER_TAG 这个镜像"
-							// sh """
-							// sed -i  s/v1.1.5/\$GROUPA_DOCKER_TAG/g deployment.yaml
-							// kubectl apply -f deployment.yaml
-							// """
+							// withCredentials([usernamePassword(credentialsId: 'harbor-admin', passwordVariable: 'password', usernameVariable: 'username')]) {
+                            //     sh """
+                            //     aws eks --region \$REGION update-kubeconfig --name \$EKS_NAME
+                            //     helm repo add --username=${username} --password=${password} ${DOCKER_IMAGE} https://harbor_url/chartrepo/${NAME_SPACE}
+                            //     helm repo update
+                            //     helm upgrade -i -n fps-server --set server.image.tag=${GROUPA_DOCKER_TAG} --set server.env.value_spring_env="tw_prod" --set filebeat.config.env="tw_prod" ${DOCKER_IMAGE} ${DOCKER_IMAGE}/${DOCKER_IMAGE}
+                            //     """
+                            // }
                         }
                     // }
                 }
