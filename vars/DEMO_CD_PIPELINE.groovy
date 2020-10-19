@@ -201,7 +201,7 @@ def call(cfg) {
 
             stage('部署服务') {
                 steps {
-                    container("${cfg.CI_EKS_NAME}") {
+                    container("demo") {
                         script{
                             withCredentials([usernamePassword(credentialsId: 'harbor-admin', passwordVariable: 'password', usernameVariable: 'username')]) {
                                 sh """
@@ -210,13 +210,12 @@ def call(cfg) {
                                 helm repo update
                                 helm upgrade -i -n ${NAME_SPACE} --set server.GroupA.image.tag=${GROUPA_DOCKER_TAG} --set server.GroupB.image.tag=${GROUPB_DOCKER_TAG} --set server.env[0].name="SPRING_ENV",server.env[0].value="tw_prod" --set filebeat.config.env="tw_prod" ${DOCKER_IMAGE} ${DOCKER_IMAGE}/${DOCKER_IMAGE}
                                 """
-                                // helm upgrade -i -n ${NAME_SPACE} --set server.GroupA.image.tag=${GROUPA_DOCKER_TAG} --set server.GroupB.image.tag=${GROUPB_DOCKER_TAG} --set server.env[0].name="SPRING_ENV",server.env[0].value="tw_test123" ${DOCKER_IMAGE} ${DOCKER_IMAGE}/${DOCKER_IMAGE}
                             }
                         }
                     }
                 }
             }
-            
         }
     }
 }
+
