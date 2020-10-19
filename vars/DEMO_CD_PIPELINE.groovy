@@ -114,9 +114,9 @@ def call(cfg) {
                         sandbox: false, 
                         script: 
 							'''import groovy.json.JsonSlurper
-							def Get_env() {
+							def Get_env(DOCKER_IMAGE) {
 							  def project_name_list = []
-							  def conn ="https://hub.docker.com/v2/repositories/a7179072/demo/tags/"
+							  def conn ="https://hub.docker.com/v2/repositories/a7179072/${DOCKER_IMAGE}/tags/"
 							  def parser = new JsonSlurper()
 							  def http = new URL(conn).openConnection()
 							  http.setRequestMethod('GET')
@@ -131,7 +131,7 @@ def call(cfg) {
 								return project_name_list
 							  }
 							}
-							Get_env()'''
+							Get_env(DOCKER_IMAGE)'''
                     ]
                 ]
             ]
