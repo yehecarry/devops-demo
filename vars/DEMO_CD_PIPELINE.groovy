@@ -200,14 +200,15 @@ def call(cfg) {
 
             stage('部署服务') {
                 steps {
-                    container("kubectl-demo") {
+                    // container("kubectl-demo") {
                         script{
+                            println "如果添加kubectl-demo 会有暴露accesskey的风险，写一个伪代码，这部就是kubectl apply -f ，生产环境一般使用helm，但是JFrog 真难用"
 							sh """
-							sed -i  s/v1.1.5/\$GROUPA_DOCKER_TAG/g deployment.yaml
-							kubectl apply -f deployment.yaml
+							// sed -i  s/v1.1.5/\$GROUPA_DOCKER_TAG/g deployment.yaml
+							// kubectl apply -f deployment.yaml
 							"""
                         }
-                    }
+                    // }
                 }
             }
         }
